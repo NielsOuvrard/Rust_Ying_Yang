@@ -19,7 +19,8 @@ use bevy::{prelude::*, window::PresentMode};
 
 fn main() {
     let color_app = {
-        if env::args().len() >= 1 {
+        if env::args().len() > 1 {
+            println!("nmb of args: {}", env::args().len());
             env::args().nth(1).unwrap().to_string()
         } else {
             "night".to_string()
@@ -53,6 +54,7 @@ fn main() {
         })
         // .add_startup_system(load_tilemap)
         .add_event::<GameOver>()
+        .add_system(change_day_night)
         .add_plugin(EnemyPlugin)
         .add_plugin(PlayerPlugin)
         .add_plugin(ScorePlugin)
@@ -75,35 +77,35 @@ pub struct Data {
 //     }
 // }
 
-pub fn load_tilemap(
-    // asset_server: Res<AssetServer>,
-    // mut texture_atlases: ResMut<Assets<TextureAtlas>>,
-    data: ResMut<Data>,
-) {
-    // let texture_handle = asset_server.load("sprites/tilemap.png");
+// pub fn load_tilemap(
+// asset_server: Res<AssetServer>,
+// mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+//     data: ResMut<Data>,
+// ) {
+// let texture_handle = asset_server.load("sprites/tilemap.png");
 
-    // let texture_atlas =
-    //     TextureAtlas::from_grid(texture_handle, Vec2::new(16., 16.), 20, 20, None, None);
+// let texture_atlas =
+//     TextureAtlas::from_grid(texture_handle, Vec2::new(16., 16.), 20, 20, None, None);
 
-    // data.texture_atlas_handle = texture_atlases.add(texture_atlas);
+// data.texture_atlas_handle = texture_atlases.add(texture_atlas);
 
-    // let window = window_query.get_single().unwrap();
+// let window = window_query.get_single().unwrap();
 
-    // commands.spawn((
-    //     SpriteSheetBundle {
-    //         transform: {
-    //             let mut transform =
-    //                 Transform::from_xyz(window.width() / 2.0, window.height() / 2.0, 0.0);
-    //             transform.scale = Vec3::new(3, 3, 3);
-    //             transform
-    //         },
-    //         texture_atlas: texture_atlas_handle.clone(),
-    //         sprite: TextureAtlasSprite::new(240),
-    //         ..default()
-    //     },
-    //     Player {
-    //         frame: 0,
-    //         action: ActionPlayer::Idle,
-    //     },
-    // ));
-}
+// commands.spawn((
+//     SpriteSheetBundle {
+//         transform: {
+//             let mut transform =
+//                 Transform::from_xyz(window.width() / 2.0, window.height() / 2.0, 0.0);
+//             transform.scale = Vec3::new(3, 3, 3);
+//             transform
+//         },
+//         texture_atlas: texture_atlas_handle.clone(),
+//         sprite: TextureAtlasSprite::new(240),
+//         ..default()
+//     },
+//     Player {
+//         frame: 0,
+//         action: ActionPlayer::Idle,
+//     },
+// ));
+// }
